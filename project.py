@@ -3,6 +3,7 @@ import random
 import randint
 from _random
 
+# test edit
 def main():
 #this will be the AI trained to receive and destroy the image via photoshop
     class AI_creator:
