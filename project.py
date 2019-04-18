@@ -1,46 +1,86 @@
 import subprocess
 import random
 import randint
-from _random
+import image
+import webbrowser
 
 def main():
 #this will be the AI trained to receive and destroy the image via photoshop
     class AI_creator:
+        #might require the PILLOW extension for image drawing.
+        from PIL import Image, ImageDraw
         #get the photo from a selected library
-        pic=open(##path to file##)
-        #open it in photoshop or paint; your call
-        paint=r'#path to file'
-        subprocess.Popen("%s %s"%(paint,pic))
+        img=image.open("testimage.jpg")
+        #open via PILLOW module
+        pix=img.load()
         #get photoshop or paint to add in a smudge onto the photo... randomly, flip a coin or something i dunno.
-        coinflip=(randint(0,1))     #Might want to introduce more randomness so that the AI does more interesting things
-        #figure out how to do that
-        if coinflip==1:
-            #defile image
-            #state=1(true)
+        i=0
+        while i<3:
+            diceroll=(randint(1,20))     #Might want to introduce more randomness so that the AI does more interesting things
+            color = PIL.ImageColor.getrgb(randint(0,255),randint(0,255),randint(0,255))
+             if diceroll==1:
+                 # Horizontal Line Top
+                 draw=ImageDraw.Draw(img)
+                 draw.line((0,0,img.size[0],0),color,2)
+                 
+             if diceroll==3:
+                 # Horizontal LIne Bottom
+                 draw=ImageDraw.Draw(img)
+                 draw.line((0,img.size[1],img.size[0],img.size[1]),color,2)
 
-            #Ideas of edits
-            # Horizontal Line Top
-            # Horizontal LIne Bottom
-            # Vertical Line Top
-            # Vertical LIne Bottom
-            # Diagnol Top to Bottom
-            # Diagnol Bottom to Top
-            # Draw a Circle
-            # Random Coloring
-            # Turn everything one color
-            # Replace with anotehr picture
-        else:
-            #nothing
+             if diceroll==5:
+                 # Vertical Line LEFT
+                 draw=ImageDraw.Draw(img)
+                 draw.line((0,0,0,img.size[1]),color,2)
+
+             if diceroll==7:
+                 # Vertical LIne RIGHT
+                 draw=ImageDraw.Draw(img)
+                 draw.line((img.size[0],0,img.size[0],img.size[1]),color,2)
+
+             if diceroll==9:
+                 # Diagnol Bottom Left to Top Right
+                 draw=ImageDraw.Draw(img)
+                 draw.line((0,img.size[1],img.size[0],0),color,2)
+
+             if diceroll==11:
+                 # Diagnol Bottom Right to Top Left
+                 draw=ImageDraw.Draw(img)
+                 draw.line((0,0,img.size[0],img.size[1]),color,2)
+
+             if diceroll==13:
+                 # Cross over image
+                 draw=ImageDraw.Draw(img)
+                 draw.line((0,img.size[1]/2,img.size[0],img.size[1]/2),color,2)
+                 draw.line((img.size[0]/2,0,img.size[0]/2,img.size[1]),color,2)
+
+             if diceroll==15:
+                 # Rotate image
+                 pix.rotate(90)
+             if diceroll==17:
+                 # Turn everything one color
+                 pix.paste(color, 0, 0,image.size[0],image.size[1])
+             if diceroll==19:
+                 # Replace with another picture
+                 pix.close()
+                 im2=image.open("testimag2.jpg")
+                 pix=im2.load()
+             #if diceroll==20:
+                 #webbroswer.open_new_tab('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+             else:
+                 #The zero roll where nothing happens.
+                 #nothing
 
         #save the changes into a new library.
-        pic.close()
+        pix.save("testcopy.jpg")
 
 #this will be the AI that will be trained to recognize an image is photoshopped or not.
     class AI_recognizer:
+        state=1
         #open the new photo in the new library
         #attempt to compare the new photo with the original and determine if its real or fake.
         #If it's real or fake, announce so.
-
+        #might need state space to look like we did more than we did.
         # Might want to change it so it guesses the edits
         # To do this we shoudl see see which pixels are likely to change between two pictures
         # and Create an alogrithm where it decides which of the pixels to go to based on what difference
