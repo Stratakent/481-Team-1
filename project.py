@@ -16,6 +16,7 @@ def main():
         #get photoshop or paint to add in a smudge onto the photo... randomly, flip a coin or something i dunno.
          i=0
         while i<3:
+           #img.size as referenced multiple times in the code below gets the image sizes of the x and y coordinates.
             diceroll=(randint(1,20))     #Might want to introduce more randomness so that the AI does more interesting things
             color = PIL.ImageColor.getrgb(randint(0,255),randint(0,255),randint(0,255))
              if diceroll==1:
