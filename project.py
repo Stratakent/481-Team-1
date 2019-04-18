@@ -14,62 +14,67 @@ def main():
         #open via PILLOW module
         pix=img.load()
         #get photoshop or paint to add in a smudge onto the photo... randomly, flip a coin or something i dunno.
-        i=0
+         i=0
         while i<3:
             diceroll=(randint(1,20))     #Might want to introduce more randomness so that the AI does more interesting things
             color = PIL.ImageColor.getrgb(randint(0,255),randint(0,255),randint(0,255))
              if diceroll==1:
                  # Horizontal Line Top
-                 draw=ImageDraw.Draw(img)
-                 draw.line((0,0,img.size[0],0),color,2)
+                 pix=ImageDraw.Draw(img)
+                 pix.line((0,0,img.size[0],0),color,2)
                  
              if diceroll==3:
                  # Horizontal LIne Bottom
-                 draw=ImageDraw.Draw(img)
-                 draw.line((0,img.size[1],img.size[0],img.size[1]),color,2)
+                 pix=ImageDraw.Draw(img)
+                 pix.line((0,img.size[1],img.size[0],img.size[1]),color,2)
 
              if diceroll==5:
                  # Vertical Line LEFT
-                 draw=ImageDraw.Draw(img)
-                 draw.line((0,0,0,img.size[1]),color,2)
+                 pix=ImageDraw.Draw(img)
+                 pix.line((0,0,0,img.size[1]),color,2)
 
              if diceroll==7:
                  # Vertical LIne RIGHT
-                 draw=ImageDraw.Draw(img)
-                 draw.line((img.size[0],0,img.size[0],img.size[1]),color,2)
+                 pix=ImageDraw.Draw(img)
+                 pix.line((img.size[0],0,img.size[0],img.size[1]),color,2)
 
              if diceroll==9:
                  # Diagnol Bottom Left to Top Right
-                 draw=ImageDraw.Draw(img)
-                 draw.line((0,img.size[1],img.size[0],0),color,2)
+                 pix=ImageDraw.Draw(img)
+                 pix.line((0,img.size[1],img.size[0],0),color,2)
 
              if diceroll==11:
                  # Diagnol Bottom Right to Top Left
-                 draw=ImageDraw.Draw(img)
-                 draw.line((0,0,img.size[0],img.size[1]),color,2)
+                 pix=ImageDraw.Draw(img)
+                 pix.line((0,0,img.size[0],img.size[1]),color,2)
 
              if diceroll==13:
                  # Cross over image
-                 draw=ImageDraw.Draw(img)
-                 draw.line((0,img.size[1]/2,img.size[0],img.size[1]/2),color,2)
-                 draw.line((img.size[0]/2,0,img.size[0]/2,img.size[1]),color,2)
+                 pix=ImageDraw.Draw(img)
+                 pix.line((0,img.size[1]/2,img.size[0],img.size[1]/2),color,2)
+                 pix.line((img.size[0]/2,0,img.size[0]/2,img.size[1]),color,2)
 
              if diceroll==15:
                  # Rotate image
                  pix.rotate(90)
+
              if diceroll==17:
                  # Turn everything one color
                  pix.paste(color, 0, 0,image.size[0],image.size[1])
+
              if diceroll==19:
                  # Replace with another picture
                  pix.close()
                  im2=image.open("testimag2.jpg")
                  pix=im2.load()
+
              #if diceroll==20:
+                 #This one is for fun... just don't click the link.
                  #webbroswer.open_new_tab('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
              else:
                  #The zero roll where nothing happens.
                  #nothing
+             i+=1
 
         #save the changes into a new library.
         pix.save("testcopy.jpg")
