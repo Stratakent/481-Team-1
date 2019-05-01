@@ -7,8 +7,9 @@ from PIL import Image, ImageDraw
 def main():
     img1 = Image.open("testimage.jpg")
     AI_creator(img1)
+    img1 = Image.open("testimage.jpg")
     img2 = Image.open("testcopy.jpg")
-    img2.show()
+    AI_recognizer(img1, img2)
 
 
 def AI_creator(img):
@@ -17,7 +18,8 @@ def AI_creator(img):
     # open via PILLOW module
     # get photoshop or paint to add in a smudge onto the photo... randomly, flip a coin or something i dunno.
     i = 0
-    while i < 3:
+    j = randint(0,5)
+    while i < 5:
         # img.size as referenced multiple times in the code below gets the image sizes of the x and y coordinates.
         R=randint(0,255)
         G=randint(0,255)
@@ -64,7 +66,7 @@ def AI_creator(img):
         # This one is for fun... just don't click the link.
         # webbroswer.open_new_tab('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
         del draw
-        i = i + 1
+        i += 1
         # save the changes into a new library.
     img.save("testcopy.jpg")
     print("Using Creator...\n")
@@ -74,6 +76,7 @@ def AI_creator(img):
 # this will be the AI that will be trained to recognize an image is photoshopped or not.
 def AI_recognizer(image1, image2):
     state = 0
+    size=0
     # open the new photo in the new library
     # attempt to compare the new photo with the original and determine if its real or fake.
     # If it's real or fake, announce so.
@@ -83,22 +86,36 @@ def AI_recognizer(image1, image2):
     # and Create an alogrithm where it decides which of the pixels to go to based on what difference
     # are found?
     # Checks for rotation
-    if image1.size[0] != image2.size[0]:
-        result(state)
+    image1.show()
+    image2.show()
+    if image1.size[0]!=image2.size[0]:
+        state=1
+        size=1
     if image1.size[1] != image2.size[1]:
-        result(state)
+        state=1
+        size=1
+
+    i=0
+    while i<image1.size[0] and state==0:
+       j = 0
+       while j<image1.size[1]:
+           if image1.getpixel((i,j))!= image2.getpixel((i,j)):
+               state = 1
+               j += 1
+               break
+       i += 1
+    result(state,size)
     # Iterate though every pixel
     # If not equal images do not match
     # Else they are equal
 
-def result(state):
+def result(state,size):
     if state == 1:
         print("Image is a poorly made fake!")
+        if size == 1:
+            print("At least get the right size...")
 
     else:
         print("Image is a genuine copy!")
 
 main()
-
-    
-
