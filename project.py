@@ -8,7 +8,19 @@ def main():
     img1 = Image.open("testimage.jpg")
     AI_creator(img1)
     img1 = Image.open("testimage.jpg")
-    img2 = Image.open("testcopy.jpg")
+    RNG = randint(1,5)
+
+    if RNG==1:
+        img2 = Image.open("testcopy.jpg")
+    if RNG==2:
+        img2 = Image.open("testimage2.jpeg")
+    if RNG==3:
+        img2 = Image.open("testimage3.jpg")
+    if RNG==4:
+        img2 = Image.open("testcopy.jpg")
+    if RNG==5:
+        img2 = Image.open("testcopy.jpg")
+
     AI_recognizer(img1, img2)
 
 
@@ -24,7 +36,7 @@ def AI_creator(img):
         R=randint(0,255)
         G=randint(0,255)
         B=randint(0,255)
-        diceroll = (randint(1,20))  # Might want to introduce more randomness so that the AI does more interesting things
+        diceroll = (randint(1,25))  # Might want to introduce more randomness so that the AI does more interesting things
         print(diceroll, "\n")
         draw = ImageDraw.Draw(img)
         if diceroll == 1:
@@ -101,8 +113,8 @@ def AI_recognizer(image1, image2):
        while j<image1.size[1]:
            if image1.getpixel((i,j))!= image2.getpixel((i,j)):
                state = 1
-               j += 1
-               break
+               print("Pixels don't match.")
+           j+=1
        i += 1
     result(state,size)
     # Iterate though every pixel
@@ -114,8 +126,9 @@ def result(state,size):
         print("Image is a poorly made fake!")
         if size == 1:
             print("At least get the right size...")
-
     else:
         print("Image is a genuine copy!")
 
 main()
+
+
