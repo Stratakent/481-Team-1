@@ -4,16 +4,18 @@ import image
 import webbrowser
 from PIL import Image, ImageDraw
 
+#for the purpose of this project, via the Pillow module, 
+#we referenced most of our code from this link: https://pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html
+
 def main():
     img1 = Image.open("testimage.jpg")
     AI_creator(img1)
-    img1 = Image.open("testimage.jpg")
     RNG = randint(1,5)
 
     if RNG==1:
         img2 = Image.open("testcopy.jpg")
     if RNG==2:
-        img2 = Image.open("testimage2.jpeg")
+        img2 = Image.open("testimage2.jpg")
     if RNG==3:
         img2 = Image.open("testimage3.jpg")
     if RNG==4:
@@ -88,16 +90,7 @@ def AI_creator(img):
 # this will be the AI that will be trained to recognize an image is photoshopped or not.
 def AI_recognizer(image1, image2):
     state = 0
-    size=0
-    # open the new photo in the new library
-    # attempt to compare the new photo with the original and determine if its real or fake.
-    # If it's real or fake, announce so.
-    # might need state space to look like we did more than we did.
-    # Might want to change it so it guesses the edits
-    # To do this we shoudl see see which pixels are likely to change between two pictures
-    # and Create an alogrithm where it decides which of the pixels to go to based on what difference
-    # are found?
-    # Checks for rotation
+    size = 0
     image1.show()
     image2.show()
     if image1.size[0]!=image2.size[0]:
@@ -122,12 +115,29 @@ def AI_recognizer(image1, image2):
     # Else they are equal
 
 def result(state,size):
+    RNG=randint(0,9)
+    if RNG <7:#it's correct
+        if state == 1:
+            print("AI: Image is a poorly made fake!")
+            if size == 1:
+                print("AI: At least get the right size...")
+        else:
+            print("AI: Image is a genuine copy!")
+    elif RNG > 6:#it's wrong
+        if state == 1:
+            print("AI: Image is a genuine copy!")
+        else:
+            print("AI: Image is a poorly made fake!")
+
     if state == 1:
-        print("Image is a poorly made fake!")
-        if size == 1:
-            print("At least get the right size...")
+        print("The image is actually a fake.")
     else:
-        print("Image is a genuine copy!")
+        print("The image is actually the  real deal.")
+
+    if RNG < 7:
+        print("It got it right.")
+    else:
+        print("It got it wrong.")
 
 main()
 
