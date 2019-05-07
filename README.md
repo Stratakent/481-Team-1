@@ -11,6 +11,10 @@ While we are unable to successfully implement a complete AI in order to successf
  To run this program, you must download the PILLOW module in order to run it, any images will work, just label them appropriately as stated in the code, the random module, and lastly be up to date with python.
 
 Works Cited:
-Lundh, Fredrik, and Alex Clark. “ImageDraw Module.” ImageDraw Module - Pillow 
+
+Alex Clark and Lundh, Fredrik. “ImageDraw Module.” ImageDraw Module - Pillow 
   (PIL Fork) 3.1.2 Documentation, 2016,
-  pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html.
+  <pillow.readthedocs.io/en/3.1.x/reference/ImageDraw.html>.
+Oberhaus, Daniel. “This AI Will Turn Your Dog Into a Cat.” Vice, VICE, 16 Apr. 2018, 
+   <www.vice.com/en_us/article/kzxkvm/neural-network-  
+   transforms-dogs-into-cats-ai-gan.>
